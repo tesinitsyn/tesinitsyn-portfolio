@@ -1,103 +1,122 @@
+"use client";
+import { FaGithub, FaTelegram } from "react-icons/fa";
+import GlassCard from "../components/GlassCard";
+import FadeInSection from "../components/FadeInSection";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+
+export default function Home() {
+    return (
+        <div className="flex flex-col gap-8">
+            {/* Главный блок */}
+            <FadeInSection>
+                <GlassCard>
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
+                        {/* Аватар */}
+                        <div className="flex justify-center">
+                            <Image
+                                src="/IMG_1270.jpeg"   // путь от корня public/
+                                alt="avatar"
+                                width={224}
+                                height={224}
+                                className="w-56 h-56 rounded-full border-4 border-white/40 shadow-xl object-cover"
+                            />
+                        </div>
+
+                        {/* Описание */}
+                        <div className="flex flex-col gap-4 text-center md:text-left">
+                            <h1 className="text-4xl font-bold">Тимофей Синицын</h1>
+                            <h2 className="text-lg text-gray-600 dark:text-gray-300">
+                                Java & Android разработчик
+                            </h2>
+                            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                                Увлекаюсь микросервисами, мобильными приложениями и созданием
+                                полезных продуктов. Опыт работы с Java, Spring Boot, Kotlin,
+                                Android, PostgreSQL, Kafka, RabbitMQ и Docker.
+                            </p>
+
+                            {/* Кнопки */}
+                            <div className="flex gap-3 justify-center md:justify-start">
+                                <a
+                                    href="https://github.com/your-github"
+                                    target="_blank"
+                                    className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 dark:bg-white/10 border border-white/30 backdrop-blur-md hover:bg-white/30 dark:hover:bg-white/20 transition"
+                                >
+                                    <FaGithub className="text-xl" />
+                                    GitHub
+                                </a>
+
+                                <a
+                                    href="https://t.me/tesinitsyn"
+                                    target="_blank"
+                                    className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 dark:bg-white/10 border border-white/30 backdrop-blur-md hover:bg-white/30 dark:hover:bg-white/20 transition"
+                                >
+                                    <FaTelegram className="text-xl text-sky-500" />
+                                    Telegram
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </GlassCard>
+            </FadeInSection>
+
+            {/* Блок технологий */}
+            <FadeInSection>
+                <GlassCard>
+                    <h3 className="text-2xl font-bold mb-4 text-center">Мои технологии</h3>
+                    <div className="flex flex-wrap gap-3 justify-center">
+                        {[
+                            "Java",
+                            "Spring Boot",
+                            "Kotlin",
+                            "Android",
+                            "PostgreSQL",
+                            "Kafka",
+                            "RabbitMQ",
+                            "Docker",
+                        ].map((tech, i) => (
+                            <span
+                                key={i}
+                                className="px-4 py-2 text-sm rounded-full bg-white/20 dark:bg-white/10 border border-white/30 hover:scale-105 transition"
+                            >
+                {tech}
+              </span>
+                        ))}
+                    </div>
+                </GlassCard>
+            </FadeInSection>
+
+            {/* Блок краткого опыта */}
+            <FadeInSection>
+                <GlassCard>
+                    <h3 className="text-2xl font-bold mb-4 text-center">Последние проекты</h3>
+                    <ul className="space-y-3 text-sm">
+                        <li>
+                            <strong>Java-разработчик</strong> — Крок инкорпорейтед (2024–2025)
+                        </li>
+                        <li>
+                            <strong>Android-разработчик</strong> — AV Power (2023)
+                        </li>
+                        <li>
+                            <strong>Java-разработчик</strong> — Институт ИИ при РТУ МИРЭА (2022–2023)
+                        </li>
+                    </ul>
+                    <div className="text-center mt-4">
+                        <a href="/experience" className="text-blue-500 hover:underline">
+                            Подробнее →
+                        </a>
+                    </div>
+                </GlassCard>
+            </FadeInSection>
+
+            {/* Футер */}
+            <FadeInSection>
+                <footer className="text-center text-sm text-gray-500 dark:text-gray-400 py-6">
+                    © {new Date().getFullYear()} Тимофей Синицын. Сделано с ❤️ на Next.js и Tailwind.
+                </footer>
+            </FadeInSection>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
