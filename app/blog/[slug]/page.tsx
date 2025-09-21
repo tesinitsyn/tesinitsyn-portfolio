@@ -1,24 +1,32 @@
+import { getPostBySlug } from "@/lib/posts";
 import GlassCard from "../../../components/GlassCard";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { marked } from "marked";
+import FadeInSection from "@/components/FadeInSection";
 
-export default async function Post({ params }: { params: { slug: string } }) {
-    const filePath = path.join(process.cwd(), "posts", `${params.slug}.md`);
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { content, data } = matter(fileContent);
-    const html = marked(content);
+interface Props {
+    params: Promise<{ slug: string }>; // 👈 теперь params асинхронный
+}
+
+export default async function Post({ params }: Props) {
+    const { slug } = await params;         // 👈 ждем params
+    const post = await getPostBySlug(slug);
 
     return (
-        <div className="flex justify-center">
+        <FadeInSection>
             <GlassCard>
-                <article className="prose dark:prose-invert max-w-none">
-                    <h1>{data.title}</h1>
-                    <p className="text-sm text-gray-500">{data.date}</p>
-                    <div dangerouslySetInnerHTML={{ __html: html }} />
+                <article className="prose lg:prose-xl dark:prose-invert max-w-none">
+                    <h1 className="mb-2">{post.title}</h1>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                        <time dateTime={post.date}>
+                            {new Date(post.date).toLocaleDateString("ru-RU", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            })}
+                        </time>
+                    </div>
+                    <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
                 </article>
             </GlassCard>
-        </div>
+        </FadeInSection>
     );
 }

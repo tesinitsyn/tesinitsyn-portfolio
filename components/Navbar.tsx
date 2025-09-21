@@ -10,7 +10,7 @@ const links = [
     { href: "/skills", label: "Скиллы" },
     { href: "/portfolio", label: "Портфолио" },
     { href: "/contact", label: "Контакты" },
-    { href: "/blog", label: "Блог" },
+    // { href: "/blog", label: "Блог" },
 ];
 
 export default function Navbar() {

@@ -1,77 +1,62 @@
-"use client";
-import Image from "next/image";
-import { motion } from "framer-motion";
 import GlassCard from "../../components/GlassCard";
 import FadeInSection from "@/components/FadeInSection";
+import { FaGithub } from "react-icons/fa";
 
 const projects = [
     {
-        title: "HotelsRent",
+        title: "RecipeFeedRestApi",
         description:
-            "Клиент-серверное приложение для аренды отелей. Android-клиент на Jetpack Compose и сервер на Spring Boot.",
-        tech: "Kotlin, Jetpack Compose, Spring Boot, SQLite",
-        link: "https://github.com/your-github/hotelsrent",
-        image: "https://placehold.co/400x250",
+            "REST API для обмена рецептами. Поддержка CRUD-операций, работа с пользователями и интеграция с базой данных.",
+        repo: "https://github.com/tesinitsyn/RecipeFeedRestApi",
+        tech: "Java, Spring Boot, REST API, PostgreSQL",
     },
     {
-        title: "Trip View",
+        title: "TripView",
         description:
-            "Мобильный гид по достопримечательностям. Экран регистрации, поиск, детали места, избранное.",
-        tech: "Kotlin, Jetpack Compose, SQLite",
-        link: "https://github.com/your-github/tripview",
-        image: "https://placehold.co/400x250",
+            "Мобильное приложение-гид по достопримечательностям с серверным API. Возможность добавлять места, искать и сохранять избранное.",
+        repo: "https://github.com/tesinitsyn/TripView",
+        tech: "Kotlin, Jetpack Compose, SQLite, REST API",
     },
     {
-        title: "Система контроля финансов (CROC)",
+        title: "AutoShow",
         description:
-            "Автоматизация процессов финансового контроля, интеграции с внешними сервисами, отчетность.",
-        tech: "Java 11, Spring Boot, Kafka, RabbitMQ, PostgreSQL, GraphQL",
-        link: "",
-        image: "https://placehold.co/400x250",
+            "iOS-приложение для автолюбителей: поиск и покупка билетов на автомероприятия",
+        repo: "https://github.com/tesinitsyn/AutoShow",
+        tech: "Swift, SwiftUI, CoreData",
+    },
+    {
+        title: "SleepTimer",
+        description:
+            "Простое MacOS-приложение. Позволяет запускать медиа и автоматически выключать по времени.",
+        repo: "https://github.com/tesinitsyn/SleepTimer",
+        tech: "Swift, SwiftUI",
     },
 ];
 
 export default function Portfolio() {
     return (
-        <div className="space-y-6">
-            {projects.map((p, i) => (
-                <GlassCard key={i}>
-                    <div className="grid md:grid-cols-3 gap-6 items-center">
-                        {/* Левая часть — картинка */}
-                        <motion.div
-                            whileHover={{ scale: 1.03 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                            className="relative w-full h-40 rounded-xl overflow-hidden border border-white/20"
+        <div className="grid md:grid-cols-2 gap-6">
+            {projects.map((project, index) => (
+                <FadeInSection key={index}>
+                    <GlassCard>
+                        <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                        <p className="text-gray-700 dark:text-gray-300 mb-3">
+                            {project.description}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <strong>Технологии:</strong> {project.tech}
+                        </p>
+                        <a
+                            href={project.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 dark:bg-black/20 backdrop-blur-md border border-white/30 shadow hover:scale-[1.02] transition"
                         >
-                            <Image
-                                src={p.image}
-                                alt={p.title}
-                                fill
-                                className="object-cover"
-                            />
-                        </motion.div>
-
-                        {/* Правая часть */}
-                        <div className="md:col-span-2 flex flex-col gap-3">
-                            <h3 className="text-xl font-bold">{p.title}</h3>
-                            <p className="text-gray-700 dark:text-gray-300 text-sm">
-                                {p.description}
-                            </p>
-                            <p className="text-xs text-gray-500">
-                                <strong>Технологии:</strong> {p.tech}
-                            </p>
-                            {p.link && (
-                                <a
-                                    href={p.link}
-                                    target="_blank"
-                                    className="self-start mt-1 px-4 py-1.5 rounded-full bg-white/20 dark:bg-white/10 border border-white/30 backdrop-blur-md hover:bg-white/30 dark:hover:bg-white/20 transition text-sm"
-                                >
-                                    Посмотреть →
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                </GlassCard>
+                            <FaGithub />
+                            <span>Перейти в репозиторий</span>
+                        </a>
+                    </GlassCard>
+                </FadeInSection>
             ))}
         </div>
     );

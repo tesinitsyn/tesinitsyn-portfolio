@@ -1,10 +1,8 @@
 "use client";
-import { FaGithub, FaTelegram } from "react-icons/fa";
+import {FaGithub, FaTelegram} from "react-icons/fa";
 import GlassCard from "../components/GlassCard";
 import FadeInSection from "../components/FadeInSection";
 import Image from "next/image";
-
-
 
 
 export default function Home() {
@@ -29,22 +27,22 @@ export default function Home() {
                         <div className="flex flex-col gap-4 text-center md:text-left">
                             <h1 className="text-4xl font-bold">Тимофей Синицын</h1>
                             <h2 className="text-lg text-gray-600 dark:text-gray-300">
-                                Java & Android разработчик
+                                Java разработчик
                             </h2>
                             <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                                Увлекаюсь микросервисами, мобильными приложениями и созданием
-                                полезных продуктов. Опыт работы с Java, Spring Boot, Kotlin,
-                                Android, PostgreSQL, Kafka, RabbitMQ и Docker.
+                                Увлекаюсь проектированием и развитием микросервисных систем, созданием надежных и
+                                полезных продуктов. Опыт коммерческой разработки с использованием Java, Spring Boot,
+                                PostgreSQL, Kafka, RabbitMQ и Docker.
                             </p>
 
                             {/* Кнопки */}
                             <div className="flex gap-3 justify-center md:justify-start">
                                 <a
-                                    href="https://github.com/your-github"
+                                    href="https://github.com/tesinitsyn"
                                     target="_blank"
                                     className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 dark:bg-white/10 border border-white/30 backdrop-blur-md hover:bg-white/30 dark:hover:bg-white/20 transition"
                                 >
-                                    <FaGithub className="text-xl" />
+                                    <FaGithub className="text-xl"/>
                                     GitHub
                                 </a>
 
@@ -53,7 +51,7 @@ export default function Home() {
                                     target="_blank"
                                     className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 dark:bg-white/10 border border-white/30 backdrop-blur-md hover:bg-white/30 dark:hover:bg-white/20 transition"
                                 >
-                                    <FaTelegram className="text-xl text-sky-500" />
+                                    <FaTelegram className="text-xl text-sky-500"/>
                                     Telegram
                                 </a>
                             </div>
@@ -109,13 +107,6 @@ export default function Home() {
                         </a>
                     </div>
                 </GlassCard>
-            </FadeInSection>
-
-            {/* Футер */}
-            <FadeInSection>
-                <footer className="text-center text-sm text-gray-500 dark:text-gray-400 py-6">
-                    © {new Date().getFullYear()} Тимофей Синицын. Сделано с ❤️ на Next.js и Tailwind.
-                </footer>
             </FadeInSection>
         </div>
     );

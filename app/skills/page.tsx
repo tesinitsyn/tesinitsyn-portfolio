@@ -1,41 +1,92 @@
 "use client";
-import { FaJava, FaDocker, FaGitAlt, FaAndroid } from "react-icons/fa";
-import { SiSpringboot, SiKotlin, SiPostgresql, SiMongodb, SiApachekafka, SiRabbitmq, SiGraphql, SiKubernetes } from "react-icons/si";
-import { motion } from "framer-motion";
-import GlassCard from "../../components/GlassCard";
 
-const skills = [
-    { name: "Java", icon: <FaJava /> },
-    { name: "Spring Boot", icon: <SiSpringboot /> },
-    { name: "PostgreSQL", icon: <SiPostgresql /> },
-    { name: "MongoDB", icon: <SiMongodb /> },
-    { name: "Kafka", icon: <SiApachekafka /> },
-    { name: "RabbitMQ", icon: <SiRabbitmq /> },
-    { name: "GraphQL", icon: <SiGraphql /> },
-    { name: "Docker", icon: <FaDocker /> },
-    { name: "Kubernetes", icon: <SiKubernetes /> },
-    { name: "Git", icon: <FaGitAlt /> },
-    { name: "Kotlin", icon: <SiKotlin /> },
-    { name: "Android", icon: <FaAndroid /> },
-];
+import GlassCard from "@/components/GlassCard";
+import FadeInSection from "@/components/FadeInSection";
+import SkillBadge from "@/components/SkillBadge";
+
+import {
+    SiKotlin,
+    SiSpring,
+    SiPostgresql,
+    SiDocker,
+    SiApachekafka,
+    SiGit,
+    SiGradle,
+    SiJunit5,
+    SiGraphql,
+    SiRedis,
+    SiSwift,
+} from "react-icons/si";
+import { FaJava } from "react-icons/fa";
+
+const skillGroups = {
+    Backend: [
+        { label: "Java", icon: FaJava },
+        { label: "Kotlin", icon: SiKotlin },
+        { label: "Spring Boot", icon: SiSpring },
+        { label: "GraphQL", icon: SiGraphql },
+        { label: "Redis", icon: SiRedis },
+        { label: "PostgreSQL", icon: SiPostgresql },
+        { label: "JUnit 5", icon: SiJunit5 },
+    ],
+    Mobile: [
+        { label: "Kotlin (Android)", icon: SiKotlin },
+        { label: "iOS (Swift)", icon: SiSwift },
+    ],
+    DevOps: [
+        { label: "Docker", icon: SiDocker },
+        { label: "Kafka", icon: SiApachekafka },
+    ],
+    Tools: [
+        { label: "Git", icon: SiGit },
+        { label: "Gradle", icon: SiGradle },
+    ],
+};
 
 export default function Skills() {
+    const categories = Object.keys(skillGroups);
+
     return (
-        <GlassCard>
-            <h2 className="text-3xl font-bold mb-6">Навыки</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
-                {skills.map((s) => (
-                    <motion.div
-                        key={s.name}
-                        whileHover={{ y: -4, scale: 1.03 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white/15 dark:bg-white/10 border border-white/30 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.3)]"
-                    >
-                        <div className="text-4xl">{s.icon}</div>
-                        <div className="text-sm font-semibold">{s.name}</div>
-                    </motion.div>
-                ))}
-            </div>
-        </GlassCard>
+        <FadeInSection>
+            <GlassCard>
+                <h2 className="text-3xl font-bold mb-6">Навыки</h2>
+                <div className="overflow-x-auto">
+                    <table className="w-full border-collapse text-center">
+                        <thead>
+                        <tr>
+                            {categories.map((cat, idx) => (
+                                <th
+                                    key={idx}
+                                    className="px-4 py-3 text-lg font-semibold text-gray-800 dark:text-gray-200 border-b border-gray-300 dark:border-gray-700"
+                                >
+                                    {cat}
+                                </th>
+                            ))}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {categories.map((cat, idx) => (
+                                <td
+                                    key={idx}
+                                    className="px-4 py-6 align-top border-b border-gray-200 dark:border-gray-700"
+                                >
+                                    <ul className="grid grid-cols-2 gap-4 justify-items-center">
+                                        {skillGroups[cat as keyof typeof skillGroups].map(
+                                            ({ label, icon }, i) => (
+                                                <li key={i}>
+                                                    <SkillBadge label={label} icon={icon} />
+                                                </li>
+                                            )
+                                        )}
+                                    </ul>
+                                </td>
+                            ))}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </GlassCard>
+        </FadeInSection>
     );
 }

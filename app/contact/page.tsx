@@ -1,95 +1,84 @@
-"use client";
-import GlassCard from "../../components/GlassCard";
-import { motion } from "framer-motion";
-import {
-    FaEnvelope,
-    FaPhone,
-    FaTelegram,
-    FaGithub,
-    FaFilePdf,
-} from "react-icons/fa";
 import Image from "next/image";
-
+import GlassCard from "@/components/GlassCard";
+import FadeInSection from "@/components/FadeInSection";
+import { FaTelegramPlane, FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaDownload } from "react-icons/fa";
 
 export default function Contact() {
-    const contacts = [
-        {
-            href: "mailto:sitiev174@gmail.com",
-            icon: <FaEnvelope className="text-red-500 text-lg" />,
-            label: "sitiev174@gmail.com",
-        },
-        {
-            href: "tel:+79193393089",
-            icon: <FaPhone className="text-green-500 text-lg" />,
-            label: "+7 (919) 339-30-89",
-        },
-        {
-            href: "https://t.me/tesinitsyn",
-            icon: <FaTelegram className="text-sky-500 text-lg" />,
-            label: "@tesinitsyn",
-        },
-        {
-            href: "https://github.com/your-github",
-            icon: <FaGithub className="text-gray-700 dark:text-gray-300 text-lg" />,
-            label: "GitHub",
-        },
-    ];
+    // TODO: подставь свои реальные контакты:
+    const EMAIL = "sitiev174@gmail.com";
+    const PHONE = "+79193393089";
+    const TELEGRAM = "tesinitsyn"; // только ник
+    const GITHUB = "tesinitsyn";
+    const LINKEDIN = "your-linkedin-slug";
+    const RESUME_URL = "/resume.pdf"; // положи файл в /public/resume.pdf
+    const PHOTO_URL = "/me.jpeg";      // положи фото в /public/me.jpg
+
+    const linkClass = "inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 dark:bg-black/20 backdrop-blur-md border border-white/30 shadow hover:scale-[1.02] transition";
 
     return (
-        <GlassCard>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-                {/* Левая часть — профиль */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-3">
-                    <Image
-                        src="/me.jpeg"   // путь от корня public/
-                        alt="avatar"
-                        width={224}
-                        height={224}
-                        className="w-56 h-56 rounded-full border-4 border-white/40 shadow-xl object-cover"
-                        />
-                    <h2 className="text-2xl font-bold">Тимофей Синицын</h2>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                        Java & Android разработчик
-                    </p>
-                    <a
-                        href="/resume.pdf"
-                        download
-                        className="mt-2 inline-block px-4 py-2 rounded-full bg-white/20 dark:bg-white/10 border border-white/30 backdrop-blur-md hover:bg-white/30 dark:hover:bg-white/20 transition text-sm"
-                    >
-                        📄 Скачать резюме
-                    </a>
-                </div>
+        <FadeInSection>
+            <GlassCard>
+                <h2 className="text-3xl font-bold mb-6">Контакты</h2>
 
-                {/* Правая часть — контакты */}
-                <div className="grid sm:grid-cols-2 gap-3">
-                    {contacts.map((c, i) => (
-                        <motion.a
-                            key={i}
-                            href={c.href}
-                            target={c.href.startsWith("http") ? "_blank" : undefined}
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                            className="flex items-center gap-3 p-3 rounded-xl bg-white/15 dark:bg-white/10 border border-white/20 hover:bg-white/25 transition"
+                <div className="grid gap-8 md:grid-cols-3">
+                    {/* Левая колонка — фото + резюме */}
+                    <div className="md:col-span-1 flex flex-col items-center gap-4">
+                        <div
+                            className="
+                relative w-44 h-44 md:w-52 md:h-52
+                rounded-full overflow-hidden
+                border-4 border-white/40
+                shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]
+                bg-white/10
+              "
                         >
-                            {c.icon}
-                            <span className="text-sm">{c.label}</span>
-                        </motion.a>
-                    ))}
+                            <Image
+                                src={PHOTO_URL}
+                                alt="Фото Тимофея Синицына"
+                                fill
+                                className="object-cover"
+                                sizes="208px"
+                                priority
+                            />
+                        </div>
 
-                    {/* резюме как отдельная карточка тоже */}
-                    <motion.a
-                        href="/resume.pdf"
-                        download
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-white/15 dark:bg-white/10 border border-white/20 hover:bg-white/25 transition"
-                    >
-                        <FaFilePdf className="text-pink-600 text-lg" />
-                        <span className="text-sm">Скачать резюме (PDF)</span>
-                    </motion.a>
+                        <a href={RESUME_URL} download className={linkClass}>
+                            <FaDownload aria-hidden />
+                            <span>Скачать резюме (PDF)</span>
+                        </a>
+                    </div>
+
+                    {/* Правая колонка — контакты и быстрые ссылки */}
+                    <div className="md:col-span-2 grid gap-6">
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            <a className={linkClass} href={`mailto:${EMAIL}`}>
+                                <FaEnvelope aria-hidden />
+                                <span>{EMAIL}</span>
+                            </a>
+                            <a className={linkClass} href={`tel:${PHONE.replace(/\s|\(|\)|-/g, "")}`}>
+                                <FaPhone aria-hidden />
+                                <span>{PHONE}</span>
+                            </a>
+                            <a className={linkClass} href={`https://t.me/${TELEGRAM}`} target="_blank" rel="noopener noreferrer">
+                                <FaTelegramPlane aria-hidden />
+                                <span>@{TELEGRAM}</span>
+                            </a>
+                            <a className={linkClass} href={`https://github.com/${GITHUB}`} target="_blank" rel="noopener noreferrer">
+                                <FaGithub aria-hidden />
+                                <span>github.com/{GITHUB}</span>
+                            </a>
+                            <a className={linkClass} href={`https://www.linkedin.com/in/${LINKEDIN}`} target="_blank" rel="noopener noreferrer">
+                                <FaLinkedin aria-hidden />
+                                <span>linkedin.com/in/{LINKEDIN}</span>
+                            </a>
+                        </div>
+
+                        <p className="text-sm text-gray-700 dark:text-gray-300">
+                            Открыт к предложениям и проектам. Пишите на почту или в телеграм — отвечаю оперативно.
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </GlassCard>
+            </GlassCard>
+        </FadeInSection>
     );
-
 }
