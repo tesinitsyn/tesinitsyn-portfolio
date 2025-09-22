@@ -49,42 +49,27 @@ export default function Skills() {
     return (
         <FadeInSection>
             <GlassCard>
-                <h2 className="text-3xl font-bold mb-6">Навыки</h2>
-                <div className="overflow-x-auto">
-                    <table className="w-full border-collapse text-center">
-                        <thead>
-                        <tr>
-                            {categories.map((cat, idx) => (
-                                <th
-                                    key={idx}
-                                    className="px-4 py-3 text-lg font-semibold text-gray-800 dark:text-gray-200 border-b border-gray-300 dark:border-gray-700"
-                                >
-                                    {cat}
-                                </th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            {categories.map((cat, idx) => (
-                                <td
-                                    key={idx}
-                                    className="px-4 py-6 align-top border-b border-gray-200 dark:border-gray-700"
-                                >
-                                    <ul className="grid grid-cols-2 gap-4 justify-items-center">
-                                        {skillGroups[cat as keyof typeof skillGroups].map(
-                                            ({ label, icon }, i) => (
-                                                <li key={i}>
-                                                    <SkillBadge label={label} icon={icon} />
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
-                                </td>
-                            ))}
-                        </tr>
-                        </tbody>
-                    </table>
+                <h2 className="text-3xl font-bold mb-8 text-center">Навыки</h2>
+
+                {/* Сетка категорий */}
+                <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+                    {categories.map((cat, idx) => (
+                        <div
+                            key={idx}
+                            className="flex flex-col items-center text-center space-y-4"
+                        >
+                            <h3 className="text-xl font-semibold">{cat}</h3>
+                            <ul className="grid grid-cols-2 gap-4 w-full justify-items-center">
+                                {skillGroups[cat as keyof typeof skillGroups].map(
+                                    ({ label, icon }, i) => (
+                                        <li key={i}>
+                                            <SkillBadge label={label} icon={icon} />
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
             </GlassCard>
         </FadeInSection>

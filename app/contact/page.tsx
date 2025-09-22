@@ -4,7 +4,6 @@ import FadeInSection from "@/components/FadeInSection";
 import { FaTelegramPlane, FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaDownload } from "react-icons/fa";
 
 export default function Contact() {
-    // TODO: подставь свои реальные контакты:
     const EMAIL = "sitiev174@gmail.com";
     const PHONE = "+79193393089";
     const TELEGRAM = "tesinitsyn"; // только ник
